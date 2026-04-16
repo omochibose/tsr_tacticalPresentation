@@ -265,6 +265,16 @@
       border-radius: 2px;
     }
 
+    .sidebar__note {
+      margin: 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .sidebar__note code {
+      font-size: 0.78rem;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .card {
         transition: none;
@@ -316,43 +326,67 @@
 
       <aside class="sidebar" aria-label="参考リンク">
         <h2 class="sidebar__title">参考・関連サイト</h2>
-
-        <section class="link-group">
-          <h3>Hudl / Sportscode</h3>
-          <ul>
-            <li><a href="https://www.hudl.com/support/hudl-sportscode" target="_blank" rel="noopener noreferrer">Hudl Sportscode サポート（トップ）</a></li>
-            <li><a href="https://www.hudl.com/products/sportscode/tiers" target="_blank" rel="noopener noreferrer">Sportscode プラン比較</a></li>
-            <li><a href="https://jp.hudl.com/ja/products/studio" target="_blank" rel="noopener noreferrer">Hudl Studio（日本語）</a></li>
-            <li><a href="https://www.hudl.com/support/hudl-sportscode/review/playlist-organizer" target="_blank" rel="noopener noreferrer">Playlist Organizer</a></li>
-          </ul>
-        </section>
-
-        <section class="link-group">
-          <h3>ツール・ドキュメント</h3>
-          <ul>
-            <li><a href="https://www.dartfish.com/ja/support" target="_blank" rel="noopener noreferrer">Dartfish サポート</a></li>
-            <li><a href="https://developers.google.com/youtube/documentation?hl=ja" target="_blank" rel="noopener noreferrer">YouTube Data API</a></li>
-            <li><a href="https://platform.openai.com/overview" target="_blank" rel="noopener noreferrer">OpenAI Platform</a></li>
-            <li><a href="https://www.deepl.com/ja/translator" target="_blank" rel="noopener noreferrer">DeepL翻訳</a></li>
-          </ul>
-        </section>
-
-        <section class="link-group">
-          <h3>シラバス・校内向け</h3>
-          <ul>
-            <li><a href="https://www.tsr.ac.jp/documents/education/sa-syllabus.pdf" target="_blank" rel="noopener noreferrer">スポーツ分析 シラバス（PDF）</a></li>
-          </ul>
-        </section>
-
-        <section class="link-group">
-          <h3>読み物（参考）</h3>
-          <ul>
-            <li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5353041" target="_blank" rel="noopener noreferrer">ChatGPT as a Cognitive Crutch（論文）</a></li>
-            <li><a href="https://zenn.dev/syoshida07/articles/a1a77067399d6c" target="_blank" rel="noopener noreferrer">AI学習は若手を弱くする？（解説）</a></li>
-          </ul>
-        </section>
+        <div id="sidebar-links"></div>
+        <noscript>
+          <p class="sidebar__note">参考リンクの表示には JavaScript が必要です。</p>
+        </noscript>
+        <p class="sidebar__note">更新は <code>published/data/sidebar-links.json</code> を編集してください。</p>
       </aside>
     </div>
   </div>
+  <script>
+    async function renderSidebarLinks() {
+      const mount = document.getElementById("sidebar-links");
+      if (!mount) return;
+
+      try {
+        const response = await fetch("data/sidebar-links.json", { cache: "no-cache" });
+        if (!response.ok) throw new Error("Failed to fetch sidebar link data.");
+
+        const data = await response.json();
+        const groups = Array.isArray(data.groups) ? data.groups : [];
+
+        mount.textContent = "";
+
+        for (const group of groups) {
+          if (!group || typeof group.title !== "string" || !Array.isArray(group.links)) {
+            continue;
+          }
+
+          const section = document.createElement("section");
+          section.className = "link-group";
+
+          const heading = document.createElement("h3");
+          heading.textContent = group.title;
+          section.appendChild(heading);
+
+          const list = document.createElement("ul");
+          for (const item of group.links) {
+            if (!item || typeof item.title !== "string" || typeof item.url !== "string") {
+              continue;
+            }
+
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.href = item.url;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+            a.textContent = item.title;
+            li.appendChild(a);
+            list.appendChild(li);
+          }
+
+          if (list.childElementCount > 0) {
+            section.appendChild(list);
+            mount.appendChild(section);
+          }
+        }
+      } catch (error) {
+        mount.innerHTML = '<p class="sidebar__note">参考リンクを読み込めませんでした。しばらくしてから再読み込みしてください。</p>';
+      }
+    }
+
+    renderSidebarLinks();
+  </script>
 </body>
 </html>
