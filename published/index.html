@@ -196,6 +196,65 @@
       margin-bottom: 0.35rem;
     }
 
+    .schedule-section {
+      margin-top: 2rem;
+    }
+
+    .schedule-table-wrap {
+      overflow-x: auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 34rem;
+      font-size: 0.9rem;
+    }
+
+    .schedule-table th,
+    .schedule-table td {
+      padding: 0.7rem 0.85rem;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .schedule-table thead th {
+      background: #f8fafc;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .schedule-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .schedule-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .schedule-link:hover {
+      text-decoration: underline;
+    }
+
+    .schedule-link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
     /* サイドパネル */
     .sidebar {
       background: var(--surface);
@@ -322,6 +381,38 @@
 
           <!-- 新しい講義を追加するときは、上の <a class="card"> … </a> をコピーして並べてください -->
         </div>
+
+        <section class="schedule-section" aria-labelledby="schedule-title">
+          <h2 id="schedule-title" class="section-title">講義スケジュール</h2>
+          <div class="schedule-table-wrap">
+            <table class="schedule-table">
+              <thead>
+                <tr>
+                  <th scope="col">講義番号</th>
+                  <th scope="col">講義日</th>
+                  <th scope="col">内容</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>前期１</td><td>April 13, 2026</td><td><a class="schedule-link" href="lecture01/">オリエンテーション</a></td></tr>
+                <tr><td>前期２</td><td>April 20, 2026</td><td>プレゼンテーションの役割</td></tr>
+                <tr><td>前期３</td><td>April 27, 2026</td><td>情報伝達①</td></tr>
+                <tr><td>前期４</td><td>May 11, 2026</td><td>情報伝達②</td></tr>
+                <tr><td>前期５</td><td>May 18, 2026</td><td>理解促進</td></tr>
+                <tr><td>前期６</td><td>May 25, 2026</td><td>納得形成①</td></tr>
+                <tr><td>前期７</td><td>June 1, 2026</td><td>納得形成②</td></tr>
+                <tr><td>前期８</td><td>June 8, 2026</td><td>行動喚起①</td></tr>
+                <tr><td>前期９</td><td>June 15, 2026</td><td>行動喚起②</td></tr>
+                <tr><td>前期１０</td><td>June 22, 2026</td><td>議論の練習</td></tr>
+                <tr><td>前期１１</td><td>July 6, 2026</td><td>他者との駆け引き①</td></tr>
+                <tr><td>前期１２</td><td>July 13, 2026</td><td>他者との駆け引き②</td></tr>
+                <tr><td>前期１３</td><td>July 20, 2026</td><td>前期のまとめ</td></tr>
+                <tr><td>前期１４</td><td>July 27, 2026</td><td>前期のまとめ</td></tr>
+                <tr><td>前期１５</td><td>August 3, 2026</td><td>試験</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </main>
 
       <aside class="sidebar" aria-label="参考リンク">
@@ -330,7 +421,6 @@
         <noscript>
           <p class="sidebar__note">参考リンクの表示には JavaScript が必要です。</p>
         </noscript>
-        <p class="sidebar__note">更新は <code>published/data/sidebar-links.json</code> を編集してください。</p>
       </aside>
     </div>
   </div>

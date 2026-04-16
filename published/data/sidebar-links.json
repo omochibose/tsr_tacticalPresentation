@@ -1,65 +1,14 @@
 {
   "groups": [
     {
-      "title": "Hudl / Sportscode",
-      "links": [
-        {
-          "title": "Hudl Sportscode サポート（トップ）",
-          "url": "https://www.hudl.com/support/hudl-sportscode"
-        },
-        {
-          "title": "Sportscode プラン比較",
-          "url": "https://www.hudl.com/products/sportscode/tiers"
-        },
-        {
-          "title": "Hudl Studio（日本語）",
-          "url": "https://jp.hudl.com/ja/products/studio"
-        },
-        {
-          "title": "Playlist Organizer",
-          "url": "https://www.hudl.com/support/hudl-sportscode/review/playlist-organizer"
-        }
-      ]
-    },
-    {
-      "title": "ツール・ドキュメント",
-      "links": [
-        {
-          "title": "Dartfish サポート",
-          "url": "https://www.dartfish.com/ja/support"
-        },
-        {
-          "title": "YouTube Data API",
-          "url": "https://developers.google.com/youtube/documentation?hl=ja"
-        },
-        {
-          "title": "OpenAI Platform",
-          "url": "https://platform.openai.com/overview"
-        },
-        {
-          "title": "DeepL翻訳",
-          "url": "https://www.deepl.com/ja/translator"
-        }
-      ]
-    },
-    {
-      "title": "シラバス・校内向け",
-      "links": [
-        {
-          "title": "スポーツ分析 シラバス（PDF）",
-          "url": "https://www.tsr.ac.jp/documents/education/sa-syllabus.pdf"
-        }
-      ]
-    },
-    {
-      "title": "読み物（参考）",
+      "title": "講義１ オリエンテーション",
       "links": [
         {
           "title": "ChatGPT as a Cognitive Crutch（論文）",
           "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5353041"
         },
         {
-          "title": "AI学習は若手を弱くする？（解説）",
+          "title": "AI学習は若手を弱くする？（Webサイト）",
           "url": "https://zenn.dev/syoshida07/articles/a1a77067399d6c"
         }
       ]
