@@ -1,5 +1,7 @@
 # published/ を GitHub Pages のサイトルートとして公開する
-# リポジトリ Settings → Pages → Source: GitHub Actions を選択してください。
+# Settings → Pages → Build and deployment → Source: GitHub Actions
+#
+# configure-pages は「サイトの GET」に失敗することがあるため使わない（静的配信には不要）。
 
 name: Deploy GitHub Pages
 
@@ -27,13 +29,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: published
+          # 既定では先頭が「.」のファイルが除外されるため .nojekyll を含める
+          include-hidden-files: true
 
       - name: Deploy to GitHub Pages
         id: deployment
