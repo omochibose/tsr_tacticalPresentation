@@ -3,18 +3,356 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TSR講義資料</title>
+  <meta name="description" content="ゲーム分析応用/戦術・戦略プレゼンテーション — 講義スライド一覧">
+  <title>ゲーム分析応用/戦術・戦略プレゼンテーション — 講義資料</title>
   <style>
-    body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
-    h1 { font-size: 1.25rem; }
-    ul { padding-left: 1.25rem; }
-    a { color: #0969da; }
+    :root {
+      --bg: #f4f6f9;
+      --surface: #fff;
+      --text: #1f2328;
+      --muted: #59636e;
+      --accent: #0969da;
+      --accent-soft: rgba(9, 105, 218, 0.08);
+      --border: #d1d9e0;
+      --shadow: 0 1px 3px rgba(31, 35, 40, 0.12);
+      --shadow-hover: 0 8px 24px rgba(31, 35, 40, 0.12);
+      --radius: 12px;
+      --content-max: 72rem;
+      /* ヘッダー写真の表示高さ（狭い画面〜広い画面でなだらかに変化） */
+      --header-img-height: clamp(200px, 32vh, 320px);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* 全幅ヘッダー（ビジュアル） */
+    .site-header {
+      margin: 0;
+    }
+
+    .site-header__visual {
+      margin: 0;
+      width: 100%;
+      height: var(--header-img-height);
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      line-height: 0;
+      background: #1c2128;
+    }
+
+    .site-header__visual img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .site-header__intro {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: clamp(1.25rem, 3vw, 1.75rem) 1.25rem 1.5rem;
+    }
+
+    .site-header__badge {
+      display: inline-block;
+      margin: 0 0 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .site-header h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.15rem, 2.8vw, 1.55rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.35;
+    }
+
+    .site-header .lead {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 40rem;
+    }
+
+    /* メイン + サイド */
+    .content {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: 0 1.25rem 3rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (min-width: 900px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+        gap: 2.5rem;
+      }
+    }
+
+    .section-title {
+      margin: 0 0 1rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent-soft);
+    }
+
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.35rem;
+      box-shadow: var(--shadow);
+      transition: border-color 0.15s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    }
+
+    .card:hover {
+      border-color: #80b8ff;
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .card__title {
+      margin: 0 0 0.65rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .card__meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0 0 0.75rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .card__meta time {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .card__meta-label {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.15rem 0.45rem;
+      border-radius: 6px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .card__summary {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+
+    .card__summary-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.35rem;
+    }
+
+    /* サイドパネル */
+    .sidebar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.15rem 1.2rem 1.25rem;
+      box-shadow: var(--shadow);
+    }
+
+    @media (min-width: 900px) {
+      .sidebar {
+        position: sticky;
+        top: 1rem;
+      }
+    }
+
+    .sidebar__title {
+      margin: 0 0 1rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      padding-bottom: 0.45rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .link-group {
+      margin: 0 0 1.15rem;
+    }
+
+    .link-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .link-group h3 {
+      margin: 0 0 0.45rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .link-group ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .link-group li {
+      margin: 0 0 0.35rem;
+    }
+
+    .link-group a {
+      font-size: 0.88rem;
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .link-group a:hover {
+      text-decoration: underline;
+    }
+
+    .link-group a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card {
+        transition: none;
+      }
+      .card:hover {
+        transform: none;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>講義スライド</h1>
-  <ul>
-    <li><a href="lecture01/">第1回（オリエンテーション）</a></li>
-  </ul>
+  <header class="site-header">
+    <div class="site-header__visual">
+      <img
+        src="assets/header_img_tsr.jpg"
+        alt="試合中、タブレットを見ながら戦術を確認するコーチの様子"
+        width="7123"
+        height="4749"
+        decoding="async"
+        fetchpriority="high"
+      >
+    </div>
+    <div class="site-header__intro">
+      <h1>ゲーム分析応用/戦術・戦略プレゼンテーション</h1>
+      <p class="lead">各回のスライドへ移動できます。開いたタブでは左右キーまたはスペースで操作できます。</p>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="layout">
+      <main class="layout-main">
+        <h2 class="section-title">講義スライド一覧</h2>
+        <div class="card-list">
+          <a class="card" href="lecture01/">
+            <h3 class="card__title">第1回　オリエンテーション</h3>
+            <div class="card__meta">
+              <span class="card__meta-label">講義日</span>
+              <time datetime="2026-04-13">2026年4月13日</time>
+            </div>
+            <div class="card__summary">
+              <span class="card__summary-label">概要</span>
+              ゼミの進め方・評価・スケジュールの共有。ツールや提出物の前提説明。
+            </div>
+          </a>
+
+          <!-- 新しい講義を追加するときは、上の <a class="card"> … </a> をコピーして並べてください -->
+        </div>
+      </main>
+
+      <aside class="sidebar" aria-label="参考リンク">
+        <h2 class="sidebar__title">参考・関連サイト</h2>
+
+        <section class="link-group">
+          <h3>Hudl / Sportscode</h3>
+          <ul>
+            <li><a href="https://www.hudl.com/support/hudl-sportscode" target="_blank" rel="noopener noreferrer">Hudl Sportscode サポート（トップ）</a></li>
+            <li><a href="https://www.hudl.com/products/sportscode/tiers" target="_blank" rel="noopener noreferrer">Sportscode プラン比較</a></li>
+            <li><a href="https://jp.hudl.com/ja/products/studio" target="_blank" rel="noopener noreferrer">Hudl Studio（日本語）</a></li>
+            <li><a href="https://www.hudl.com/support/hudl-sportscode/review/playlist-organizer" target="_blank" rel="noopener noreferrer">Playlist Organizer</a></li>
+          </ul>
+        </section>
+
+        <section class="link-group">
+          <h3>ツール・ドキュメント</h3>
+          <ul>
+            <li><a href="https://www.dartfish.com/ja/support" target="_blank" rel="noopener noreferrer">Dartfish サポート</a></li>
+            <li><a href="https://developers.google.com/youtube/documentation?hl=ja" target="_blank" rel="noopener noreferrer">YouTube Data API</a></li>
+            <li><a href="https://platform.openai.com/overview" target="_blank" rel="noopener noreferrer">OpenAI Platform</a></li>
+            <li><a href="https://www.deepl.com/ja/translator" target="_blank" rel="noopener noreferrer">DeepL翻訳</a></li>
+          </ul>
+        </section>
+
+        <section class="link-group">
+          <h3>シラバス・校内向け</h3>
+          <ul>
+            <li><a href="https://www.tsr.ac.jp/documents/education/sa-syllabus.pdf" target="_blank" rel="noopener noreferrer">スポーツ分析 シラバス（PDF）</a></li>
+          </ul>
+        </section>
+
+        <section class="link-group">
+          <h3>読み物（参考）</h3>
+          <ul>
+            <li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5353041" target="_blank" rel="noopener noreferrer">ChatGPT as a Cognitive Crutch（論文）</a></li>
+            <li><a href="https://zenn.dev/syoshida07/articles/a1a77067399d6c" target="_blank" rel="noopener noreferrer">AI学習は若手を弱くする？（解説）</a></li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </div>
 </body>
 </html>
