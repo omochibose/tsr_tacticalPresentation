@@ -33,6 +33,7 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.65;
+      overflow-x: hidden;
     }
 
     /* 全幅ヘッダー（ビジュアル） */
@@ -211,8 +212,9 @@
     .schedule-table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 34rem;
+      min-width: 0;
       font-size: 0.9rem;
+      table-layout: fixed;
     }
 
     .schedule-table th,
@@ -221,6 +223,8 @@
       text-align: left;
       vertical-align: top;
       border-bottom: 1px solid var(--border);
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
 
     .schedule-table thead th {
@@ -340,6 +344,33 @@
       }
       .card:hover {
         transform: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .content {
+        padding-inline: 0.85rem;
+      }
+
+      .site-header__intro {
+        padding-inline: 0.85rem;
+      }
+
+      .card {
+        padding: 1rem;
+      }
+
+      .sidebar {
+        padding: 1rem;
+      }
+
+      .schedule-table {
+        font-size: 0.82rem;
+      }
+
+      .schedule-table th,
+      .schedule-table td {
+        padding: 0.55rem 0.5rem;
       }
     }
   </style>
