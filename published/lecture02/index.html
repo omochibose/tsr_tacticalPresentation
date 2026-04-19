@@ -14,6 +14,16 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- 末尾スラッシュなしだと相対URL（assets/・libs/）が親ディレクトリ基準に解決され壊れるため補正 -->
+  <script>
+    (function () {
+      var p = window.location.pathname;
+      if (p.endsWith("/lecture02")) {
+        window.history.replaceState(null, "", p + "/" + window.location.search + window.location.hash);
+      }
+    })();
+  </script>
+
   <link rel="stylesheet" href="libs/reveal.js/4.3.1/reset.css">
   <link rel="stylesheet" href="libs/reveal.js/4.3.1/reveal.css">
 
@@ -452,7 +462,7 @@
         <section >
             
             <p><strong>グラフの例</strong></p>
-<p><img src="/tsr_tacticalPresentation/lecture02/assets/lecture02_linechart.png" alt="観客動員数の推移（開幕戦〜第4節）と平均値の折れ線グラフ"></p>
+<p><img src="assets/lecture02_linechart.png" alt="観客動員数の推移（開幕戦〜第4節）と平均値の折れ線グラフ"></p>
 
             </section>
     
