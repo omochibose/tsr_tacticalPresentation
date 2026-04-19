@@ -14,20 +14,11 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- 相対URL(libs/, assets/)の基準をこのデッキのディレクトリに固定。末尾スラ無しや #/ のみのURLでも誤解決しない -->
+  <!-- 相対URL(libs/, assets/)の基準をこのデッキのディレクトリに固定。origin+pathname 連結は環境によって壊れるため URL API で組む -->
   <script>
     (function () {
-      var path = window.location.pathname;
-      var dir;
-      if (path.endsWith("/")) {
-        dir = path;
-      } else if (/\.html$/i.test(path)) {
-        dir = path.replace(/\/[^/]+$/, "/");
-      } else {
-        dir = path + "/";
-      }
       var b = document.createElement("base");
-      b.href = window.location.origin + dir;
+      b.href = new URL(".", window.location.href).href;
       var m = document.querySelector("meta[charset]");
       (m || document.head).insertAdjacentElement(m ? "afterend" : "beforeend", b);
     })();
@@ -471,7 +462,13 @@
         <section >
             
             <p><strong>グラフの例</strong></p>
-<p><img src="assets/lecture02_linechart.png" alt="観客動員数の推移（開幕戦〜第4節）と平均値の折れ線グラフ"></p>
+<p><img id="tsr-l02-linechart" alt="観客動員数の推移（開幕戦〜第4節）と平均値の折れ線グラフ" width="1024" height="521" decoding="async"></p>
+<script>
+  (function () {
+    var el = document.getElementById("tsr-l02-linechart");
+    if (el) el.src = new URL("assets/lecture02_linechart.png", window.location.href).href;
+  })();
+</script>
             </section>
     
 
