@@ -14,13 +14,22 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- 末尾スラッシュなしだと相対URL（assets/・libs/）が親ディレクトリ基準に解決され壊れるため補正 -->
+  <!-- 相対URL(libs/, assets/)の基準をこのデッキのディレクトリに固定。末尾スラ無しや #/ のみのURLでも誤解決しない -->
   <script>
     (function () {
-      var p = window.location.pathname;
-      if (p.endsWith("/lecture02")) {
-        window.history.replaceState(null, "", p + "/" + window.location.search + window.location.hash);
+      var path = window.location.pathname;
+      var dir;
+      if (path.endsWith("/")) {
+        dir = path;
+      } else if (/\.html$/i.test(path)) {
+        dir = path.replace(/\/[^/]+$/, "/");
+      } else {
+        dir = path + "/";
       }
+      var b = document.createElement("base");
+      b.href = window.location.origin + dir;
+      var m = document.querySelector("meta[charset]");
+      (m || document.head).insertAdjacentElement(m ? "afterend" : "beforeend", b);
     })();
   </script>
 
