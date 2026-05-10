@@ -1,10 +1,20 @@
+/**
+ * Black theme for reveal.js. This is the opposite of the 'white' theme.
+ *
+ * By Hakim El Hattab, http://hakim.se
+ */
+@import url(./fonts/source-sans-pro/source-sans-pro.css);
+section.has-light-background, section.has-light-background h1, section.has-light-background h2, section.has-light-background h3, section.has-light-background h4, section.has-light-background h5, section.has-light-background h6 {
+  color: #222;
+}
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
 :root {
   --r-background-color: #191919;
   --r-main-font: Source Sans Pro, Helvetica, sans-serif;
-  --r-main-font-size: 30px;
+  --r-main-font-size: 42px;
   --r-main-color: #fff;
   --r-block-margin: 20px;
   --r-heading-margin: 0 0 20px 0;
@@ -16,15 +26,15 @@
   --r-heading-text-shadow: none;
   --r-heading-font-weight: 600;
   --r-heading1-text-shadow: none;
-  --r-heading1-size: 1.6em;
-  --r-heading2-size: 1.4em;
-  --r-heading3-size: 1.1em;
+  --r-heading1-size: 2.5em;
+  --r-heading2-size: 1.6em;
+  --r-heading3-size: 1.3em;
   --r-heading4-size: 1em;
   --r-code-font: monospace;
   --r-link-color: #42affa;
   --r-link-color-dark: #068de9;
   --r-link-color-hover: #8dcffc;
-  --r-selection-background-color: rgba(66, 175, 250, 0.75);
+  --r-selection-background-color: #bee4fd;
   --r-selection-color: #fff;
 }
 
@@ -38,12 +48,6 @@
   font-size: var(--r-main-font-size);
   font-weight: normal;
   color: var(--r-main-color);
-}
-
-.reveal ::-moz-selection {
-  color: var(--r-selection-color);
-  background: var(--r-selection-background-color);
-  text-shadow: none;
 }
 
 .reveal ::selection {
@@ -94,7 +98,6 @@
 
 .reveal h3 {
   font-size: var(--r-heading3-size);
-  margin: 1.5em 0 0 0;
 }
 
 .reveal h4 {
@@ -146,14 +149,6 @@
   display: inline-block;
   text-align: left;
   margin: 0 0 0 1em;
-}
-
-.reveal ul li {
-  margin: 0.5em 0 0 0;
-}
-
-.reveal ul ul li {
-  margin: 0.2em 0 0 0;
 }
 
 .reveal ol {
@@ -224,9 +219,7 @@
 .reveal code {
   font-family: var(--r-code-font);
   text-transform: none;
-  -moz-tab-size: 2;
-    -o-tab-size: 2;
-       tab-size: 2;
+  tab-size: 2;
 }
 
 .reveal pre code {
@@ -275,16 +268,6 @@
 .reveal table tbody tr:last-child th,
 .reveal table tbody tr:last-child td {
   border-bottom: none;
-}
-
-/* 横に広い比較表など：当該スライドの表だけ文字を小さく */
-.reveal .slides section.has-compact-table table {
-  font-size: 0.52em;
-}
-.reveal .slides section.has-compact-table table th,
-.reveal .slides section.has-compact-table table td {
-  padding: 0.25em 0.45em;
-  line-height: 1.35;
 }
 
 .reveal sup {
@@ -371,4 +354,4 @@
   .backgrounds {
     background-color: var(--r-background-color);
   }
-}/*# sourceMappingURL=black.css.map */
+}

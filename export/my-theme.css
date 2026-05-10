@@ -277,6 +277,16 @@
   border-bottom: none;
 }
 
+/* 横に広い比較表など：当該スライドの表だけ文字を小さく */
+.reveal .slides section.has-compact-table table {
+  font-size: 0.52em;
+}
+.reveal .slides section.has-compact-table table th,
+.reveal .slides section.has-compact-table table td {
+  padding: 0.25em 0.45em;
+  line-height: 1.35;
+}
+
 .reveal sup {
   vertical-align: super;
   font-size: smaller;
