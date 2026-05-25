@@ -277,6 +277,53 @@
   border-bottom: none;
 }
 
+/* 画像を基準にキャプションを重ねる（グリッドで画像と同じ範囲に配置） */
+.reveal .slides section .media-overlay {
+  display: inline-grid;
+  max-width: 95%;
+  margin: var(--r-block-margin) auto;
+}
+
+.reveal .slides section .media-overlay img,
+.reveal .slides section .media-overlay__caption-wrap {
+  grid-area: 1 / 1;
+}
+
+.reveal .slides section .media-overlay img {
+  display: block;
+  margin: 0;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+
+.reveal .slides section .media-overlay__caption-wrap {
+  position: relative;
+  justify-self: center;
+  align-self: var(--caption-align, center);
+  margin-top: var(--caption-top, 0);
+  z-index: 2;
+  pointer-events: none;
+  width: max-content;
+  max-width: calc(100% - 1em);
+}
+
+.reveal .slides section .media-overlay__caption {
+  display: inline-block;
+  width: auto;
+  margin: 0 !important;
+  padding: 0.35em 0.9em;
+  background: #fff;
+  color: #e53935 !important;
+  text-shadow: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  text-transform: none;
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
 /* 横に広い比較表など：当該スライドの表だけ文字を小さく */
 .reveal .slides section.has-compact-table table {
   font-size: 0.52em;

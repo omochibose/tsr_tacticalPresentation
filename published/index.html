@@ -1,561 +1,679 @@
 <!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ゲーム分析応用/戦術・戦略プレゼンテーション — 講義スライド一覧">
-  <title>ゲーム分析応用/戦術・戦略プレゼンテーション — 講義資料</title>
-  <style>
-    :root {
-      --bg: #f4f6f9;
-      --surface: #fff;
-      --text: #1f2328;
-      --muted: #59636e;
-      --accent: #0969da;
-      --accent-soft: rgba(9, 105, 218, 0.08);
-      --border: #d1d9e0;
-      --shadow: 0 1px 3px rgba(31, 35, 40, 0.12);
-      --shadow-hover: 0 8px 24px rgba(31, 35, 40, 0.12);
-      --radius: 12px;
-      --content-max: 72rem;
-      /* ヘッダー写真の表示高さ（狭い画面〜広い画面でなだらかに変化） */
-      --header-img-height: clamp(200px, 32vh, 320px);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
-
-    /* 全幅ヘッダー（ビジュアル） */
-    .site-header {
-      margin: 0;
-    }
-
-    .site-header__visual {
-      margin: 0;
-      width: 100%;
-      height: var(--header-img-height);
-      overflow: hidden;
-      border-bottom: 1px solid var(--border);
-      line-height: 0;
-      background: #1c2128;
-    }
-
-    .site-header__visual img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-    }
-
-    .site-header__intro {
-      max-width: var(--content-max);
-      margin: 0 auto;
-      padding: clamp(1.25rem, 3vw, 1.75rem) 1.25rem 1.5rem;
-    }
-
-    .site-header__badge {
-      display: inline-block;
-      margin: 0 0 0.5rem;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-
-    .site-header h1 {
-      margin: 0 0 0.5rem;
-      font-size: clamp(1.15rem, 2.8vw, 1.55rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.35;
-    }
-
-    .site-header .lead {
-      margin: 0;
-      font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 40rem;
-    }
-
-    /* メイン + サイド */
-    .content {
-      max-width: var(--content-max);
-      margin: 0 auto;
-      padding: 0 1.25rem 3rem;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      align-items: start;
-    }
-
-    @media (min-width: 900px) {
-      .layout {
-        grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
-        gap: 2.5rem;
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="ゲーム分析応用/戦術・戦略プレゼンテーション — 講義スライド一覧"
+    />
+    <title>ゲーム分析応用/戦術・戦略プレゼンテーション — 講義資料</title>
+    <style>
+      :root {
+        --bg: #f4f6f9;
+        --surface: #fff;
+        --text: #1f2328;
+        --muted: #59636e;
+        --accent: #0969da;
+        --accent-soft: rgba(9, 105, 218, 0.08);
+        --border: #d1d9e0;
+        --shadow: 0 1px 3px rgba(31, 35, 40, 0.12);
+        --shadow-hover: 0 8px 24px rgba(31, 35, 40, 0.12);
+        --radius: 12px;
+        --content-max: 72rem;
+        /* ヘッダー写真の表示高さ（狭い画面〜広い画面でなだらかに変化） */
+        --header-img-height: clamp(200px, 32vh, 320px);
       }
-    }
 
-    .section-title {
-      margin: 0 0 1rem;
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--accent-soft);
-    }
-
-    .card-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .card {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.25rem 1.35rem;
-      box-shadow: var(--shadow);
-      transition: border-color 0.15s ease, box-shadow 0.2s ease, transform 0.15s ease;
-    }
-
-    .card:hover {
-      border-color: #80b8ff;
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-2px);
-    }
-
-    .card:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    .card__title {
-      margin: 0 0 0.65rem;
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    .card__meta {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin: 0 0 0.75rem;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .card__meta time {
-      font-variant-numeric: tabular-nums;
-    }
-
-    .card__meta-label {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.15rem 0.45rem;
-      border-radius: 6px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
-
-    .card__summary {
-      margin: 0;
-      font-size: 0.92rem;
-      color: var(--text);
-    }
-
-    .card__summary-label {
-      display: block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 0.35rem;
-    }
-
-    .schedule-section {
-      margin-top: 2rem;
-    }
-
-    .schedule-table-wrap {
-      overflow-x: auto;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .schedule-table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 0;
-      font-size: 0.9rem;
-      table-layout: fixed;
-    }
-
-    .schedule-table th,
-    .schedule-table td {
-      padding: 0.7rem 0.85rem;
-      text-align: left;
-      vertical-align: top;
-      border-bottom: 1px solid var(--border);
-      word-break: break-word;
-      overflow-wrap: anywhere;
-    }
-
-    .schedule-table thead th {
-      background: #f8fafc;
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-    }
-
-    .schedule-table tbody tr:last-child td {
-      border-bottom: 0;
-    }
-
-    .schedule-link {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .schedule-link:hover {
-      text-decoration: underline;
-    }
-
-    .schedule-link:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-      border-radius: 2px;
-    }
-
-    /* サイドパネル */
-    .sidebar {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.15rem 1.2rem 1.25rem;
-      box-shadow: var(--shadow);
-    }
-
-    @media (min-width: 900px) {
-      .sidebar {
-        position: sticky;
-        top: 1rem;
+      * {
+        box-sizing: border-box;
       }
-    }
 
-    .sidebar__title {
-      margin: 0 0 1rem;
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      padding-bottom: 0.45rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .link-group {
-      margin: 0 0 1.15rem;
-    }
-
-    .link-group:last-child {
-      margin-bottom: 0;
-    }
-
-    .link-group h3 {
-      margin: 0 0 0.45rem;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .link-group ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .link-group li {
-      margin: 0 0 0.35rem;
-    }
-
-    .link-group a {
-      font-size: 0.88rem;
-      color: var(--accent);
-      text-decoration: none;
-      word-break: break-word;
-    }
-
-    .link-group a:hover {
-      text-decoration: underline;
-    }
-
-    .link-group a:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-      border-radius: 2px;
-    }
-
-    .sidebar__note {
-      margin: 0;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .sidebar__note code {
-      font-size: 0.78rem;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .card {
-        transition: none;
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          "Hiragino Sans",
+          "Hiragino Kaku Gothic ProN",
+          Meiryo,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+        overflow-x: hidden;
       }
-      .card:hover {
-        transform: none;
-      }
-    }
 
-    @media (max-width: 640px) {
-      .content {
-        padding-inline: 0.85rem;
+      /* 全幅ヘッダー（ビジュアル） */
+      .site-header {
+        margin: 0;
+      }
+
+      .site-header__visual {
+        margin: 0;
+        width: 100%;
+        height: var(--header-img-height);
+        overflow: hidden;
+        border-bottom: 1px solid var(--border);
+        line-height: 0;
+        background: #1c2128;
+      }
+
+      .site-header__visual img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
       }
 
       .site-header__intro {
-        padding-inline: 0.85rem;
+        max-width: var(--content-max);
+        margin: 0 auto;
+        padding: clamp(1.25rem, 3vw, 1.75rem) 1.25rem 1.5rem;
+      }
+
+      .site-header__badge {
+        display: inline-block;
+        margin: 0 0 0.5rem;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+
+      .site-header h1 {
+        margin: 0 0 0.5rem;
+        font-size: clamp(1.15rem, 2.8vw, 1.55rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.35;
+      }
+
+      .site-header .lead {
+        margin: 0;
+        font-size: 0.95rem;
+        color: var(--muted);
+        max-width: 40rem;
+      }
+
+      /* メイン + サイド */
+      .content {
+        max-width: var(--content-max);
+        margin: 0 auto;
+        padding: 0 1.25rem 3rem;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        align-items: start;
+      }
+
+      @media (min-width: 900px) {
+        .layout {
+          grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+          gap: 2.5rem;
+        }
+      }
+
+      .section-title {
+        margin: 0 0 1rem;
+        font-size: 1.05rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--accent-soft);
+      }
+
+      .card-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
       }
 
       .card {
-        padding: 1rem;
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.25rem 1.35rem;
+        box-shadow: var(--shadow);
+        transition:
+          border-color 0.15s ease,
+          box-shadow 0.2s ease,
+          transform 0.15s ease;
       }
 
-      .sidebar {
-        padding: 1rem;
+      .card:hover {
+        border-color: #80b8ff;
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-2px);
+      }
+
+      .card:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .card__title {
+        margin: 0 0 0.65rem;
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--accent);
+      }
+
+      .card__meta {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0 0 0.75rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .card__meta time {
+        font-variant-numeric: tabular-nums;
+      }
+
+      .card__meta-label {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.15rem 0.45rem;
+        border-radius: 6px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+
+      .card__summary {
+        margin: 0;
+        font-size: 0.92rem;
+        color: var(--text);
+      }
+
+      .card__summary-label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 0.35rem;
+      }
+
+      .schedule-section {
+        margin-top: 2rem;
+      }
+
+      .schedule-table-wrap {
+        overflow-x: auto;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
       }
 
       .schedule-table {
-        font-size: 0.82rem;
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 0;
+        font-size: 0.9rem;
+        table-layout: fixed;
       }
 
       .schedule-table th,
       .schedule-table td {
-        padding: 0.55rem 0.5rem;
+        padding: 0.7rem 0.85rem;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid var(--border);
+        word-break: break-word;
+        overflow-wrap: anywhere;
       }
-    }
-  </style>
-</head>
-<body>
-  <header class="site-header">
-    <div class="site-header__visual">
-      <img
-        src="assets/header_img_tsr.jpg"
-        alt="試合中、タブレットを見ながら戦術を確認するコーチの様子"
-        width="7123"
-        height="4749"
-        decoding="async"
-        fetchpriority="high"
-      >
-    </div>
-    <div class="site-header__intro">
-      <h1>ゲーム分析応用/戦術・戦略プレゼンテーション</h1>
-      <p class="lead">各回のスライドへ移動できます。開いたタブでは左右キーまたはスペースで操作できます。</p>
-    </div>
-  </header>
 
-  <div class="content">
-    <div class="layout">
-      <main class="layout-main">
-        <h2 class="section-title">講義スライド一覧</h2>
-        <div class="card-list">
-          <a class="card" href="lecture05/">
-            <h3 class="card__title">第5回　理解促進</h3>
-            <div class="card__meta">
-              <span class="card__meta-label">講義日</span>
-              <time datetime="2026-05-18">2026年5月18日</time>
-            </div>
-            <div class="card__summary">
-              <span class="card__summary-label">概要</span>
-              テキストに加えてビジュアライゼーションを用いたプレゼンの効果を学ぶ
-            </div>
-          </a>
+      .schedule-table thead th {
+        background: #f8fafc;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
 
-          <a class="card" href="lecture04/">
-            <h3 class="card__title">第4回　情報伝達②</h3>
-            <div class="card__meta">
-              <span class="card__meta-label">講義日</span>
-              <time datetime="2026-05-11">2026年5月11日</time>
-            </div>
-            <div class="card__summary">
-              <span class="card__summary-label">概要</span>
-              プレゼンに不可欠な信頼性の高いデータについて、どのように収集するかを学ぶ
-            </div>
-          </a>
+      .schedule-table tbody tr:last-child td {
+        border-bottom: 0;
+      }
 
-          <a class="card" href="lecture03/">
-            <h3 class="card__title">第3回　情報伝達①</h3>
-            <div class="card__meta">
-              <span class="card__meta-label">講義日</span>
-              <time datetime="2026-04-20">2026年4月27日</time>
-            </div>
-            <div class="card__summary">
-              <span class="card__summary-label">概要</span>
-              ドキュメントベースでのプレゼン資料作成の概要を学ぶ
-            </div>
-          </a>
+      .schedule-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+      }
 
-          <a class="card" href="lecture02/">
-            <h3 class="card__title">第2回　プレゼンテーションの役割</h3>
-            <div class="card__meta">
-              <span class="card__meta-label">講義日</span>
-              <time datetime="2026-04-20">2026年4月20日</time>
-            </div>
-            <div class="card__summary">
-              <span class="card__summary-label">概要</span>
-              プレゼンテーションの４つの役割、およびプレゼンテーションの心得を学ぶ。
-            </div>
-          </a>
+      .schedule-link:hover {
+        text-decoration: underline;
+      }
 
-          <a class="card" href="lecture01/">
-            <h3 class="card__title">第1回　オリエンテーション</h3>
-            <div class="card__meta">
-              <span class="card__meta-label">講義日</span>
-              <time datetime="2026-04-13">2026年4月13日</time>
-            </div>
-            <div class="card__summary">
-              <span class="card__summary-label">概要</span>
-              ゼミの進め方・評価・スケジュールの共有。ツールや提出物の前提説明。
-            </div>
-          </a>
-          
-          <!-- 新しい講義を追加するときは、上の <a class="card"> … </a> をコピーして並べてください -->
-        </div>
+      .schedule-link:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
 
-        <section class="schedule-section" aria-labelledby="schedule-title">
-          <h2 id="schedule-title" class="section-title">講義スケジュール</h2>
-          <div class="schedule-table-wrap">
-            <table class="schedule-table">
-              <thead>
-                <tr>
-                  <th scope="col">講義番号</th>
-                  <th scope="col">講義日</th>
-                  <th scope="col">内容</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>前期１</td><td>April 13, 2026</td><td><a class="schedule-link" href="lecture01/">オリエンテーション</a></td></tr>
-                <tr><td>前期２</td><td>April 20, 2026</td><td><a class="schedule-link" href="lecture02/">プレゼンテーションの役割</a></td></tr>
-                <tr><td>前期３</td><td>April 27, 2026</td><td><a class="schedule-link" href="lecture03/">情報伝達①</a></td></tr>
-                <tr><td>前期４</td><td>May 11, 2026</td><td><a class="schedule-link" href="lecture04/">情報伝達②</a></td></tr>
-                <tr><td>前期５</td><td>May 18, 2026</td><td><a class="schedule-link" href="lecture05/">理解促進</a></td></tr>
-                <tr><td>前期６</td><td>May 25, 2026</td><td>納得形成①</td></tr>
-                <tr><td>前期７</td><td>June 1, 2026</td><td>納得形成②</td></tr>
-                <tr><td>前期８</td><td>June 8, 2026</td><td>行動喚起①</td></tr>
-                <tr><td>前期９</td><td>June 15, 2026</td><td>行動喚起②</td></tr>
-                <tr><td>前期１０</td><td>June 22, 2026</td><td>議論の練習</td></tr>
-                <tr><td>前期１１</td><td>July 6, 2026</td><td>他者との駆け引き①</td></tr>
-                <tr><td>前期１２</td><td>July 13, 2026</td><td>他者との駆け引き②</td></tr>
-                <tr><td>前期１３</td><td>July 20, 2026</td><td>前期のまとめ</td></tr>
-                <tr><td>前期１４</td><td>July 27, 2026</td><td>前期のまとめ</td></tr>
-                <tr><td>前期１５</td><td>August 3, 2026</td><td>試験</td></tr>
-              </tbody>
-            </table>
+      /* サイドパネル */
+      .sidebar {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.15rem 1.2rem 1.25rem;
+        box-shadow: var(--shadow);
+      }
+
+      @media (min-width: 900px) {
+        .sidebar {
+          position: sticky;
+          top: 1rem;
+        }
+      }
+
+      .sidebar__title {
+        margin: 0 0 1rem;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        padding-bottom: 0.45rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .link-group {
+        margin: 0 0 1.15rem;
+      }
+
+      .link-group:last-child {
+        margin-bottom: 0;
+      }
+
+      .link-group h3 {
+        margin: 0 0 0.45rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--muted);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .link-group ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .link-group li {
+        margin: 0 0 0.35rem;
+      }
+
+      .link-group a {
+        font-size: 0.88rem;
+        color: var(--accent);
+        text-decoration: none;
+        word-break: break-word;
+      }
+
+      .link-group a:hover {
+        text-decoration: underline;
+      }
+
+      .link-group a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+
+      .sidebar__note {
+        margin: 0;
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+
+      .sidebar__note code {
+        font-size: 0.78rem;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .card {
+          transition: none;
+        }
+        .card:hover {
+          transform: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .content {
+          padding-inline: 0.85rem;
+        }
+
+        .site-header__intro {
+          padding-inline: 0.85rem;
+        }
+
+        .card {
+          padding: 1rem;
+        }
+
+        .sidebar {
+          padding: 1rem;
+        }
+
+        .schedule-table {
+          font-size: 0.82rem;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+          padding: 0.55rem 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__visual">
+        <img
+          src="assets/header_img_tsr.jpg"
+          alt="試合中、タブレットを見ながら戦術を確認するコーチの様子"
+          width="7123"
+          height="4749"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="site-header__intro">
+        <h1>ゲーム分析応用/戦術・戦略プレゼンテーション</h1>
+        <p class="lead">
+          各回のスライドへ移動できます。開いたタブでは左右キーまたはスペースで操作できます。
+        </p>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="layout">
+        <main class="layout-main">
+          <h2 class="section-title">講義スライド一覧</h2>
+          <div class="card-list">
+            <a class="card" href="lecture06/">
+              <h3 class="card__title">第6回　理解促進②</h3>
+              <div class="card__meta">
+                <span class="card__meta-label">講義日</span>
+                <time datetime="2026-05-18">2026年5月18日</time>
+              </div>
+              <div class="card__summary">
+                <span class="card__summary-label">概要</span>
+                スポーツ科学を語らおう！論文発表会！
+              </div>
+            </a>
+
+            <a class="card" href="lecture05/">
+              <h3 class="card__title">第5回　理解促進</h3>
+              <div class="card__meta">
+                <span class="card__meta-label">講義日</span>
+                <time datetime="2026-05-18">2026年5月18日</time>
+              </div>
+              <div class="card__summary">
+                <span class="card__summary-label">概要</span>
+                テキストに加えてビジュアライゼーションを用いたプレゼンの効果を学ぶ
+              </div>
+            </a>
+
+            <a class="card" href="lecture04/">
+              <h3 class="card__title">第4回　情報伝達②</h3>
+              <div class="card__meta">
+                <span class="card__meta-label">講義日</span>
+                <time datetime="2026-05-11">2026年5月11日</time>
+              </div>
+              <div class="card__summary">
+                <span class="card__summary-label">概要</span>
+                プレゼンに不可欠な信頼性の高いデータについて、どのように収集するかを学ぶ
+              </div>
+            </a>
+
+            <a class="card" href="lecture03/">
+              <h3 class="card__title">第3回　情報伝達①</h3>
+              <div class="card__meta">
+                <span class="card__meta-label">講義日</span>
+                <time datetime="2026-04-20">2026年4月27日</time>
+              </div>
+              <div class="card__summary">
+                <span class="card__summary-label">概要</span>
+                ドキュメントベースでのプレゼン資料作成の概要を学ぶ
+              </div>
+            </a>
+
+            <a class="card" href="lecture02/">
+              <h3 class="card__title">第2回　プレゼンテーションの役割</h3>
+              <div class="card__meta">
+                <span class="card__meta-label">講義日</span>
+                <time datetime="2026-04-20">2026年4月20日</time>
+              </div>
+              <div class="card__summary">
+                <span class="card__summary-label">概要</span>
+                プレゼンテーションの４つの役割、およびプレゼンテーションの心得を学ぶ。
+              </div>
+            </a>
+
+            <a class="card" href="lecture01/">
+              <h3 class="card__title">第1回　オリエンテーション</h3>
+              <div class="card__meta">
+                <span class="card__meta-label">講義日</span>
+                <time datetime="2026-04-13">2026年4月13日</time>
+              </div>
+              <div class="card__summary">
+                <span class="card__summary-label">概要</span>
+                ゼミの進め方・評価・スケジュールの共有。ツールや提出物の前提説明。
+              </div>
+            </a>
+
+            <!-- 新しい講義を追加するときは、上の <a class="card"> … </a> をコピーして並べてください -->
           </div>
-        </section>
-      </main>
 
-      <aside class="sidebar" aria-label="参考リンク">
-        <h2 class="sidebar__title">参考・関連サイト</h2>
-        <div id="sidebar-links"></div>
-        <noscript>
-          <p class="sidebar__note">参考リンクの表示には JavaScript が必要です。</p>
-        </noscript>
-      </aside>
+          <section class="schedule-section" aria-labelledby="schedule-title">
+            <h2 id="schedule-title" class="section-title">講義スケジュール</h2>
+            <div class="schedule-table-wrap">
+              <table class="schedule-table">
+                <thead>
+                  <tr>
+                    <th scope="col">講義番号</th>
+                    <th scope="col">講義日</th>
+                    <th scope="col">内容</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>前期１</td>
+                    <td>April 13, 2026</td>
+                    <td>
+                      <a class="schedule-link" href="lecture01/"
+                        >オリエンテーション</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>前期２</td>
+                    <td>April 20, 2026</td>
+                    <td>
+                      <a class="schedule-link" href="lecture02/"
+                        >プレゼンテーションの役割</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>前期３</td>
+                    <td>April 27, 2026</td>
+                    <td>
+                      <a class="schedule-link" href="lecture03/">情報伝達①</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>前期４</td>
+                    <td>May 11, 2026</td>
+                    <td>
+                      <a class="schedule-link" href="lecture04/">情報伝達②</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>前期５</td>
+                    <td>May 18, 2026</td>
+                    <td>
+                      <a class="schedule-link" href="lecture05/">理解促進</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>前期６</td>
+                    <td>May 25, 2026</td>
+                    <td>
+                      <a class="schedule-link" href="lecture06/">理解促進②</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>前期７</td>
+                    <td>June 1, 2026</td>
+                    <td>納得形成②</td>
+                  </tr>
+                  <tr>
+                    <td>前期８</td>
+                    <td>June 8, 2026</td>
+                    <td>行動喚起①</td>
+                  </tr>
+                  <tr>
+                    <td>前期９</td>
+                    <td>June 15, 2026</td>
+                    <td>行動喚起②</td>
+                  </tr>
+                  <tr>
+                    <td>前期１０</td>
+                    <td>June 22, 2026</td>
+                    <td>議論の練習</td>
+                  </tr>
+                  <tr>
+                    <td>前期１１</td>
+                    <td>July 6, 2026</td>
+                    <td>他者との駆け引き①</td>
+                  </tr>
+                  <tr>
+                    <td>前期１２</td>
+                    <td>July 13, 2026</td>
+                    <td>他者との駆け引き②</td>
+                  </tr>
+                  <tr>
+                    <td>前期１３</td>
+                    <td>July 20, 2026</td>
+                    <td>前期のまとめ</td>
+                  </tr>
+                  <tr>
+                    <td>前期１４</td>
+                    <td>July 27, 2026</td>
+                    <td>前期のまとめ</td>
+                  </tr>
+                  <tr>
+                    <td>前期１５</td>
+                    <td>August 3, 2026</td>
+                    <td>試験</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </main>
+
+        <aside class="sidebar" aria-label="参考リンク">
+          <h2 class="sidebar__title">参考・関連サイト</h2>
+          <div id="sidebar-links"></div>
+          <noscript>
+            <p class="sidebar__note">
+              参考リンクの表示には JavaScript が必要です。
+            </p>
+          </noscript>
+        </aside>
+      </div>
     </div>
-  </div>
-  <script>
-    async function renderSidebarLinks() {
-      const mount = document.getElementById("sidebar-links");
-      if (!mount) return;
+    <script>
+      async function renderSidebarLinks() {
+        const mount = document.getElementById("sidebar-links");
+        if (!mount) return;
 
-      try {
-        const response = await fetch("data/sidebar-links.json", { cache: "no-cache" });
-        if (!response.ok) throw new Error("Failed to fetch sidebar link data.");
+        try {
+          const response = await fetch("data/sidebar-links.json", {
+            cache: "no-cache",
+          });
+          if (!response.ok)
+            throw new Error("Failed to fetch sidebar link data.");
 
-        const data = await response.json();
-        const groups = Array.isArray(data.groups) ? data.groups : [];
+          const data = await response.json();
+          const groups = Array.isArray(data.groups) ? data.groups : [];
 
-        mount.textContent = "";
+          mount.textContent = "";
 
-        for (const group of groups) {
-          if (!group || typeof group.title !== "string" || !Array.isArray(group.links)) {
-            continue;
-          }
-
-          const section = document.createElement("section");
-          section.className = "link-group";
-
-          const heading = document.createElement("h3");
-          heading.textContent = group.title;
-          section.appendChild(heading);
-
-          const list = document.createElement("ul");
-          for (const item of group.links) {
-            if (!item || typeof item.title !== "string" || typeof item.url !== "string") {
+          for (const group of groups) {
+            if (
+              !group ||
+              typeof group.title !== "string" ||
+              !Array.isArray(group.links)
+            ) {
               continue;
             }
 
-            const li = document.createElement("li");
-            const a = document.createElement("a");
-            a.href = item.url;
-            a.target = "_blank";
-            a.rel = "noopener noreferrer";
-            a.textContent = item.title;
-            li.appendChild(a);
-            list.appendChild(li);
-          }
+            const section = document.createElement("section");
+            section.className = "link-group";
 
-          if (list.childElementCount > 0) {
-            section.appendChild(list);
-            mount.appendChild(section);
+            const heading = document.createElement("h3");
+            heading.textContent = group.title;
+            section.appendChild(heading);
+
+            const list = document.createElement("ul");
+            for (const item of group.links) {
+              if (
+                !item ||
+                typeof item.title !== "string" ||
+                typeof item.url !== "string"
+              ) {
+                continue;
+              }
+
+              const li = document.createElement("li");
+              const a = document.createElement("a");
+              a.href = item.url;
+              a.target = "_blank";
+              a.rel = "noopener noreferrer";
+              a.textContent = item.title;
+              li.appendChild(a);
+              list.appendChild(li);
+            }
+
+            if (list.childElementCount > 0) {
+              section.appendChild(list);
+              mount.appendChild(section);
+            }
           }
+        } catch (error) {
+          mount.innerHTML =
+            '<p class="sidebar__note">参考リンクを読み込めませんでした。しばらくしてから再読み込みしてください。</p>';
         }
-      } catch (error) {
-        mount.innerHTML = '<p class="sidebar__note">参考リンクを読み込めませんでした。しばらくしてから再読み込みしてください。</p>';
       }
-    }
 
-    renderSidebarLinks();
-  </script>
-</body>
+      renderSidebarLinks();
+    </script>
+  </body>
 </html>
