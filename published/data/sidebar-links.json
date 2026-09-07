@@ -1,35 +1,4 @@
 {
   "groups": [
-    {
-      "title": "講義１ オリエンテーション",
-      "links": [
-        {
-          "title": "ChatGPT as a Cognitive Crutch（論文）",
-          "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5353041"
-        },
-        {
-          "title": "AI学習は若手を弱くする？（Web）",
-          "url": "https://zenn.dev/syoshida07/articles/a1a77067399d6c"
-        }
-      ]
-    },
-    {
-      "title": "講義２ プレゼンテーションの役割",
-      "links": [
-        {
-          "title": "「納得」はどう作られるか：論理だけでは人は動かない（Web）",
-          "url": "https://www.business-research-lab.com/251014-3/"
-        }
-      ]
-    },
-    {
-      "title": "講義３ 情報伝達①",
-      "links": [
-        {
-          "title": "理科系の作文技術（書籍）",
-          "url": "https://www.chuko.co.jp/shinsho/1981/09/100624.html"
-        }
-      ]
-    }
   ]
 }
