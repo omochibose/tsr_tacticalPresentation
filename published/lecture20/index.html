@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Reveal JS presentation</title>
+
+  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+  <meta name="author" content="Hakim El Hattab">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reset.css">
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reveal.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <!-- highlight Theme -->
+  
+  <link rel="stylesheet" href="libs/highlight.js/11.3.1/styles/monokai.min.css">
+  
+	
+		
+	<link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/chalkboard/style.css">
+	
+	
+	
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/customcontrols/style.css">
+  
+	
+
+
+
+  <!-- Revealjs Theme -->
+  
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/theme/black.css" id="theme">
+  
+  
+
+  <link rel="stylesheet" href="libs/styles/tasklist.css">
+	<link rel="stylesheet" href="libs/styles/iota.css">
+	<link rel="stylesheet" href="libs/styles/layout.css">
+
+
+  <!-- Revealjs Theme -->
+  
+
+   <!-- css list -->
+	
+
+   
+
+</head>
+
+<body>
+
+   
+
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+      
+
+
+    
+        <section >
+            
+            <link rel="stylesheet" href="my-theme.css">
+<p><strong>ゲーム分析応用/戦術・戦略プレゼンテーション</strong></p>
+<h1>データパイプライン</h1>
+<p>2026.10.18</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1>本日の内容</h1>
+<ul>
+<li class="fragment fade-left">前回の振り返り</li>
+<li class="fragment fade-left">Sec1 データパイプラインについて</li>
+<li class="fragment fade-left">Sec2 イメージを掴む</li>
+<li class="fragment fade-left">Sec3 設計してみよう</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1>前回の振り返り</h1>
+<ul>
+<li class="fragment fade-left">後期演習①では各自データセットを用意して分析を行なった</li>
+<li class="fragment fade-left">分析のサイクルは通常以下のように行われる
+<ul>
+<li class="fragment fade-left">課題設定</li>
+<li class="fragment fade-left">データ収集</li>
+<li class="fragment fade-left">整形（データ前処理）</li>
+<li class="fragment fade-left">分析・可視化</li>
+<li class="fragment fade-left">伝達</li>
+</ul>
+</li>
+<li class="fragment fade-left">ただし、分析は通常一度では終わらない</li>
+<li class="fragment fade-left">継続的な分析を行う上で、手作業はヒューマンエラー、負担につながる</li>
+<li class="fragment fade-left">実務を想定すると以下にこれらの処理を自動化できるかが勝負</li>
+<li class="fragment fade-left">後期演習②ではこの中のプロセスを自動化することを目指す</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1>Section1 データパイプラインについて</h1>
+<ul>
+<li>1-1 データパイプラインとは</li>
+<li>1-2 なぜデータパイプラインが必要なのか</li>
+<li>1-3 データパイプラインの全体像</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>1-1 データパイプラインとは</h2>
+<blockquote class="fragment fade-left">
+<p>あるシステムから別のシステムへデータを流す方法のこと。特定の順序で実行される一連のステップで構成され、あるステップの出力が次のステップの入力として機能する。</p>
+</blockquote>
+<p class="fragment fade-left">出典： databricks [データパイプラインとは何ですか？]</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p><img src="assets/datapipeline.jpeg" alt="データパイプラインの図"></p>
+<p>出典: Solon Das, <a href="https://jp.linkedin.com/pulse/15-real-world-data-pipeline-issues-how-solve-them-like-solon-das-pc7qc?tl=ja">15 Real-World Data Pipeline Issues and How to Solve Them Like a Pro</a>（LinkedIn, 2025.4.17）</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>1-2 なぜデータパイプラインが必要なのか</h2>
+<ul>
+<li class="fragment fade-left">先述の通り現場での分析は一度で完結しない（講義・研究を除く）</li>
+<li class="fragment fade-left">手動で何度も同じ処理を行うのは非効率かつミスの温床</li>
+<li class="fragment fade-left">データパイプラインで自動化ができれば質を担保しつつその業務から開放される！</li>
+<li class="fragment fade-left">一方で、ぶっちゃけ必要ではないし構築できる現職アナリストは少ない</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>[ちょっと脱線] 凡人は量で勝負！</h3>
+<ul>
+<li class="fragment fade-left">自分が凡人だと思う人は量で勝負しよう！</li>
+<li class="fragment fade-left">ただ残念なことに、いわゆる才能ある人たちは結構量もこなす</li>
+<li class="fragment fade-left">我々に与えられている時間は平等に24時間。</li>
+<li class="fragment fade-left">では、どのようにすれば勝てる…？</li>
+<li class="fragment fade-left">仕組みで時間を生み出し、空いた時間を考えることに使う！</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>1-3 データパイプラインの概要</h2>
+<ul>
+<li class="fragment fade-left">大まかなプロセス（工程）は以下の通り
+<ol>
+<li class="fragment fade-left">収集</li>
+<li class="fragment fade-left">整形</li>
+<li class="fragment fade-left">保存</li>
+<li class="fragment fade-left">分析・可視化</li>
+</ol>
+</li>
+<li class="fragment fade-left">前回の振り返りで紹介した「分析サイクル」とは少し違う…？</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>分析サイクルとパイプラインの対応</h3>
+<br>
+<table>
+<thead>
+<tr>
+<th>分析サイクル</th>
+<th>パイプライン</th>
+<th>対応</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>課題設定</td>
+<td>前提</td>
+<td>目的は人が決める</td>
+</tr>
+<tr>
+<td>収集</td>
+<td>収集</td>
+<td>同じ</td>
+</tr>
+<tr>
+<td>整形</td>
+<td>整形</td>
+<td>同じ</td>
+</tr>
+<tr>
+<td>—</td>
+<td><strong>保存</strong></td>
+<td><strong>新規</strong></td>
+</tr>
+<tr>
+<td>分析・可視化</td>
+<td>分析・可視化</td>
+<td>同じ</td>
+</tr>
+<tr>
+<td>伝達</td>
+<td>出口</td>
+<td>誰に・いつ届けるか</td>
+</tr>
+</tbody>
+</table>
+<br>
+<ul>
+<li class="fragment fade-left">単発の分析では、データを「貯めておく」必要がなかった</li>
+<li class="fragment fade-left">継続的に回すからこそ、前回までのデータを蓄積する「保存」が加わる</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>プロセスをつなぐ</h3>
+<ul>
+<li class="fragment fade-left">各プロセスを自動化の処理でつなぐことで、一気に成果物まで生成される</li>
+<li class="fragment fade-left">ただ、まずは<strong>一つのプロセスを自動で行えるところ</strong>までを目指そう</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p><img src="assets/datapipeline.jpeg" alt="データパイプラインの図"></p>
+<p>出典: Solon Das, <a href="https://jp.linkedin.com/pulse/15-real-world-data-pipeline-issues-how-solve-them-like-solon-das-pc7qc?tl=ja">15 Real-World Data Pipeline Issues and How to Solve Them Like a Pro</a>（LinkedIn, 2025.4.17）</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1>Section2 イメージを掴む</h1>
+<ul>
+<li>2-1 実例の紹介</li>
+<li>2-2 各種ツールの調査</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>実は身近にあるデータパイプラインっぽいツール</h2>
+<p class="fragment fade-left">Question: 身近にあるツールで思いつくものは？</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>2-1 実例の紹介</h2>
+<ul>
+<li class="fragment fade-left">Sportscode</li>
+<li class="fragment fade-left">エクセル・スプレッドシート</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>2-2 各種ツールの調査</h2>
+<ul>
+<li>ある特定のパートあるいは複数をカバーするツールを探してみよう</li>
+<li>この世にはある特定の工程のみに特化したツールが多く存在している</li>
+<li>どんなものがあるかみんなで調べてみよう</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>Task1</h3>
+<p>いろんなツールを調査してみよう</p>
+<p>Slidoで調査結果のシェア</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1>Section3 設計してみよう</h1>
+<ul>
+<li>3-1 プロセスの図式化</li>
+<li>3-2 ツールの選定</li>
+<li>3-3 後期演習②について</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>3-1 プロセスの図式化</h2>
+<ul>
+<li>最初の一歩は対象の業務フローがどのようになっているか理解すること</li>
+<li>理解を深めるためにいろいろな方法があるが、今日はフローチャートを試してみよう</li>
+<li>フローチャートのような図も実は統一された記法が存在する</li>
+<li>詳しくはUMLで検索してみよう（エンジニア以外も）</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>Task2</h3>
+<p>簡易版フローチャートを書いてみよう</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>3-2 ツールの選定</h2>
+<ul>
+<li>プロセスの中から自動化できそうな箇所を見つけよう</li>
+<li>自動化したい場所が決まったらその要件にあうツールを探す</li>
+<li>ツールは複数の候補があることが一般的であるが、要件にあうものを決める</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3>Task3</h3>
+<p>自動化するツールを選定してみよう</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>3-3 後期演習②について</h2>
+<ul>
+<li>後期演習②ではパイプラインの一工程の構築を行います</li>
+<li>題材は後期演習②で扱ったものでも、新しいテーマでも可です</li>
+<li>発表は成果物のデモンストレーションとどのように構築したか（技術仕様）について行います</li>
+</ul>
+
+            </section>
+    
+
+
+    </div>
+
+
+  </div>
+
+  <div class="line top"></div>
+  <div class="line bottom"></div>
+  <div class="line left"></div>
+  <div class="line right"></div>
+
+  <script src="libs/reveal.js/4.3.1/reveal.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/notes/notes.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/markdown/markdown.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/highlight/highlight.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/math/math.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/fullscreen/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/svg.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/Chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/d3.v3.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3.patch.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/queue.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/topojson.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/function-plot.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/customcontrols/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/embed-tweet/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/verticator/verticator.js"></script>
+
+<script src="libs/reveal.js/4.3.1/plugin/zoom/zoom.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/search/search.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/menu/menu.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chalkboard/plugin.js"></script>
+
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/plugin.js"></script>  -->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/recorder.js"></script>-->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/RecordRTC.js"></script>-->
+
+  
+
+<script>
+  const printPlugins = [
+      RevealNotes,
+      RevealHighlight,
+      RevealMath.MathJax3,
+      RevealAnimate,
+      RevealChalkboard, 
+			RevealEmbedTweet,
+			RevealChart,
+		];
+
+		const plugins =  [...printPlugins,
+		RevealZoom, 
+		RevealSearch, 
+				RevealMarkdown, 
+				RevealMenu, 
+				RevealFullscreen,
+				RevealAnything,
+				//RevealAudioSlideshow,
+				//RevealAudioRecorder,
+				RevealCustomControls, 
+				// poll
+				// question
+				// seminar
+				Verticator 
+				 ]
+
+
+		// Also available as an ES module, see:
+		// https://revealjs.com/initialization/
+		Reveal.initialize({
+			controls: true,
+      controlsTutorial: true,
+      controlsLayout: 'bottom-right',
+      controlsBackArrows: 'faded',
+      progress: true,
+      slideNumber: false,
+      //#showSlideNumber "all" "print" "speaker"
+      hash: true, //# hash: false,
+      //# respondToHashChanges: true,
+      //# history: false,
+      keyboard: true,
+      //#keyboardCondition: null,
+      overview: true,
+      center: true,
+      touch: true,
+      loop: false,
+      rtl: false,
+      //#navigationMode: 'default', linear grid
+      shuffle: false,
+      fragments: true,
+      fragmentInURL: false,
+      embedded: false,
+      help: true,
+      //#pause: true
+      showNotes: false,
+      autoPlayMedia: false, // TODO fix this to a nullable value
+      //#preloadIframes: null. true false
+      //#autoAnimate: true
+      //#autoAnimateMatcher: null,
+      //#autoAnimateEasing: 'ease',
+      //autoAnimateDuration: 1.0,
+      //#autoAnimateUnmatched: true
+      //#autoAnimateStyles: []
+      autoSlide: 0, // TODO fix this to a falseable value
+      autoSlideStoppable: true,
+      autoSlideMethod: '0',
+      defaultTiming: 120,
+      mouseWheel: false,
+      //#previewLinks: false
+      //#postMessage: true, // TODO : this can cause issues with the vscode api ???
+      //#postMessageEvents: false,
+      //#focusBodyOnPageVisibilityChange: true,
+      transition: 'fade',
+      transitionSpeed: 'slow',
+      backgroundTransition: 'fade',
+      //#pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+      //#pdfSeparateFragments: true,
+      //#pdfPageHeightOffset: -1,
+      viewDistance: 3,
+      //#mobileViewDistance: 2,
+      display: 'block',
+      //#hideInactiveCursor: true,
+      //#hideCursorTime: 5000
+
+      // Parallax Background
+      parallaxBackgroundImage: '',
+      parallaxBackgroundSize: '',
+      parallaxBackgroundHorizontal: 0,
+      parallaxBackgroundVertical: 0,
+
+      //Presentation Size
+      width: 960,
+			height: 700,
+			margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2,
+      disableLayout: false,
+
+      audio: {
+        prefix: 'audio/', // audio files are stored in the "audio" folder
+        suffix: '.ogg', // audio files have the ".ogg" ending
+        textToSpeechURL: null, // the URL to the text to speech converter
+        defaultNotes: false, // use slide notes as default for the text to speech converter
+        defaultText: false, // use slide text as default for the text to speech converter
+        advance: 0, // advance to next slide after given time in milliseconds after audio has played, use negative value to not advance
+        autoplay: false, // automatically start slideshow
+        defaultDuration: 5, // default duration in seconds if no audio is available
+        defaultAudios: true, // try to play audios with names such as audio/1.2.ogg
+        playerOpacity: 0.05, // opacity value of audio player if unfocused
+        playerStyle: 'position: fixed; bottom: 4px; left: 25%; width: 50%; height:75px; z-index: 33;', // style used for container of audio controls
+        startAtFragment: false, // when moving to a slide, start at the current fragment or at the start of the slide
+      },
+      
+      chalkboard: { // font-awesome.min.css must be available
+        //src: "chalkboard/chalkboard.json",
+        storage: "chalkboard-demo",
+      },
+      
+			customcontrols: {
+					controls: [
+      						{
+						  id: 'toggle-overview',
+						  title: 'Toggle overview (O)',
+						  icon: '<i class="fa fa-th"></i>',
+						  action: 'Reveal.toggleOverview();'
+						}
+						,
+      {
+        icon: '<i class="fa fa-pen-square"></i>',
+        title: 'Toggle chalkboard (B)',
+        action: 'RevealChalkboard.toggleChalkboard();'
+      },
+      {
+        icon: '<i class="fa fa-pen"></i>',
+        title: 'Toggle notes canvas (C)',
+        action: 'RevealChalkboard.toggleNotesCanvas();'
+      }
+      
+				]
+			},
+			chart: {
+					defaults: { 
+						color: 'lightgray', // color of labels
+						scale: { 
+							beginAtZero: true, 
+							ticks: { stepSize: 1 },
+							grid: { color: "lightgray" } , // color of grid lines
+						},
+					},
+					line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ], "borderDash": [ [5,10], [0,0] ] }, 
+					bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+					pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+					radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+			},
+			math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+				},
+				anything: [ 
+				{
+		className: "plot",
+		defaults: {width:500, height: 500, grid:true},
+		initialize: (function(container, options){ options.target = "#"+container.id; functionPlot(options) })
+	 },
+	 {
+		className: "chart",  
+		initialize: (function(container, options){ container.chart = new Chart(container.getContext("2d"), options);  })
+	 },
+	 {
+		className: "anything",
+		initialize: (function(container, options){ if (options && options.initialize) { options.initialize(container)} })
+	 },
+					],
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: (window.location.search.match(/print-pdf/gi) ? printPlugins : plugins ) 
+		});
+			
+
+
+	    // Change chalkboard theme : 
+		function changeTheme(input) {
+			var config = {};
+			config.theme = input.value;
+			Reveal.getPlugin("RevealChalkboard").configure(config);
+			input.blur();
+		}
+
+		// // Handle the message inside the webview
+        // window.addEventListener('message', event => {
+
+        //     const message = event.data; // The JSON data our extension sent
+
+        //     switch (message.command) {
+        //         case 'refactor':
+        //             Reveal.toggleHelp();
+        //     }
+        // });
+
+		if (window.location.search.match(/print-pdf-now/gi)) {
+      		setTimeout(() => {
+				window.print();
+			  }, 2500);
+			
+    }
+</script>
+
+</body>
+
+</html>
