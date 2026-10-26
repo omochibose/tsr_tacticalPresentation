@@ -73,8 +73,9 @@
             
             <link rel="stylesheet" href="my-theme.css">
 <p><strong>ゲーム分析応用/戦術・戦略プレゼンテーション</strong></p>
-<h1>後期演習①-3</h1>
-<p>2026.09.28</p>
+<h1>後期演習②-1</h1>
+<p>データパイプラインの構築
+2026.10.26</p>
 
             </section>
     
@@ -87,7 +88,8 @@
             <h1>本日の内容</h1>
 <ul>
 <li>前回の振り返り</li>
-<li>Sec1 後期演習実践</li>
+<li>Sec1 演習概要</li>
+<li>Sec2 実践</li>
 </ul>
 
             </section>
@@ -99,48 +101,10 @@
         <section >
             
             <h1>前回の振り返り</h1>
-
-            </section>
-    
-
-
-
-    
-        <section >
-            
-            <h2>後期演習①</h2>
-<p class="fragment fade-left">データセットを用いた分析　</p>
-
-            </section>
-    
-
-
-
-    
-        <section >
-            
-            <h2>本演習のマイルストーン</h2>
-<ol>
-<li class="fragment fade-left">✅ データセットの選定　</li>
-<li class="fragment fade-left">✅ テーマ設定（課題、対象、狙い）　</li>
-<li class="fragment fade-left">✅分析　</li>
-<li class="fragment fade-left">プレゼン資料作成　</li>
-<li class="fragment fade-left">発表準備　</li>
-<li class="fragment fade-left">発表（10/5）　</li>
-</ol>
-
-            </section>
-    
-
-
-
-    
-        <section >
-            
-            <h2>分析をする上でのアドバイス</h2>
 <ul>
-<li class="fragment fade-left">分析のステップを意識しよう　</li>
-<li class="fragment fade-left">全ては目的から。課題・問い・仮説を使い分けよう　</li>
+<li>データパイプラインとは何か</li>
+<li>なぜ自動化が必要か</li>
+<li>パイプラインの工程と、分析サイクルとの違い</li>
 </ul>
 
             </section>
@@ -151,32 +115,13 @@
     
         <section >
             
-            <h3 class="fragment fade-left">分析のステップを意識しよう　</h3>
-<ol>
-<li class="fragment fade-left">目的設定・仮説立案　</li>
-<li class="fragment fade-left">データ収集　</li>
-<li class="fragment fade-left">前処理　</li>
-<li class="fragment fade-left">分析　</li>
-<li class="fragment fade-left">解釈　</li>
-<li class="fragment fade-left">アクションプランの策定 　</li>
-</ol>
-
-            </section>
-    
-
-
-
-    
-        <section >
-            
-            <h3>目的・仮説立案の例</h3>
+            <h2>先週やったこと</h2>
 <ul>
-<li class="fragment fade-left">目的：試合の入りを良くする　</li>
-<li class="fragment fade-left">課題：試合開始10分間でのボールロスト数が多く失点に繋がっている　</li>
-<li class="fragment fade-left">問い：試合開始10分間の選手一人当たりの運動量（走行距離・加速度）とボール保持時間は試合中盤と比較して違いがあるか　</li>
-<li class="fragment fade-left">仮説：試合開始10分間とそれ以降（特に中盤）とを比較したときに、選手の運動量（走行距離・加速度）が低く、加えて一人当たりのボール- 保持時間が長いためボールロストが増えている　</li>
+<li class="fragment fade-left">データパイプラインは、収集 → 整形 → 保存 → 分析・可視化 をつないで回す仕組み　</li>
+<li class="fragment fade-left">継続的な分析では手作業が負担・ミスの温床になる。自動化できるかが勝負　</li>
+<li class="fragment fade-left">分析サイクルとの違いは、継続のために <strong>保存</strong> が加わること　</li>
+<li class="fragment fade-left">まずは全体を一気に作らず、<strong>一つのプロセスを自動化する</strong> ところまでを目指す　</li>
 </ul>
-<p class="fragment fade-left">→ これにより「試合前のウォーミングアップを見直そう！」という具体的なアクションプラン（提案・行動喚起）に繋げられる</p>
 
             </section>
     
@@ -187,12 +132,141 @@
         <section data-transition="slide" data-background="#00b2bc" data-background-transition="zoom">
             
             <h1>Section1</h1>
-<p>後期演習①実践</p>
+<p>演習概要</p>
 <!-- .slide: data-transition="slide" data-background="#00b2bc" data-background-transition="zoom" -->
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>後期演習②</h2>
+<p class="fragment fade-left">データパイプラインの構築　</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>演習概要</h2>
 <ul>
-<li>本日の目標</li>
+<li class="fragment fade-left">本演習では、分析プロセスを自動化するデータパイプラインの構築を行う　</li>
+<li class="fragment fade-left">各自任意のプロセスを設定し、全体ないしは部分的な自動化を目指す　</li>
+<li class="fragment fade-left">アナリスト志望でない学生は、分析以外のプロセスを設定してもよい　</li>
 </ul>
 
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>発表の形式</h2>
+<ul>
+<li class="fragment fade-left">本演習の発表はプレゼン方式で行う　</li>
+<li class="fragment fade-left">発表には、次の要素を必ず含めること　</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>発表に必ず含めること</h2>
+<ol>
+<li class="fragment fade-left">対象とするプロセスの全体像　
+<ul>
+<li class="fragment fade-left">どういった作業フローの、どの部分を自動化するか　</li>
+</ul>
+</li>
+<li class="fragment fade-left">自動化したパートの説明　
+<ul>
+<li class="fragment fade-left">使用した技術・ツールと、その選定理由　</li>
+</ul>
+</li>
+<li class="fragment fade-left">デモンストレーション　</li>
+<li class="fragment fade-left">削減される時間と諸コスト　</li>
+</ol>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>演習のマイルストーン</h2>
+<ol>
+<li class="fragment fade-left">対象プロセスの設定　</li>
+<li class="fragment fade-left">自動化パートの設定　</li>
+<li class="fragment fade-left">使用する技術の選定　</li>
+<li class="fragment fade-left">実装　</li>
+<li class="fragment fade-left">プレゼン準備　</li>
+<li class="fragment fade-left">プレゼン　</li>
+</ol>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>スケジュール</h2>
+<table>
+<thead>
+<tr>
+<th>日付</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10/26</td>
+<td>作業週</td>
+</tr>
+<tr>
+<td>11/2</td>
+<td>作業週</td>
+</tr>
+<tr>
+<td>11/9</td>
+<td>作業週</td>
+</tr>
+<tr>
+<td>11/16</td>
+<td>海外研修週間（休講）</td>
+</tr>
+<tr>
+<td>11/23</td>
+<td>発表</td>
+</tr>
+</tbody>
+</table>
+
+            </section>
+    
+
+
+
+    
+        <section data-transition="slide" data-background="#00b2bc" data-background-transition="zoom">
+            
+            <h1>Section2</h1>
+<p>実践</p>
+<!-- .slide: data-transition="slide" data-background="#00b2bc" data-background-transition="zoom" -->
             </section>
     
 
@@ -202,9 +276,7 @@
         <section >
             
             <h2>本日の目標</h2>
-<ul>
-<li class="fragment fade-left">プレゼン資料作成まで終わらせる　</li>
-</ul>
+<p class="fragment fade-left">実装フェーズに差し掛かろう！　</p>
 
             </section>
     
@@ -214,12 +286,12 @@
     
         <section >
             
-            <h2>資料作りにおけるアドバイス</h2>
+            <h2>今日進めておくこと</h2>
 <ul>
-<li class="fragment fade-left">「情報伝達」「理解促進」を意識しよう</li>
-<li class="fragment fade-left">対象者が選手であれば選手に、経営層ならそのレベルに合わせる！</li>
-<li class="fragment fade-left">選手は細かい数字が好きじゃない！</li>
-<li class="fragment fade-left">経営層はデータを好む傾向</li>
+<li class="fragment fade-left">対象プロセスを決める　</li>
+<li class="fragment fade-left">自動化するパートを決める　</li>
+<li class="fragment fade-left">使う技術・ツールの候補を出す　</li>
+<li class="fragment fade-left">実装に着手する　</li>
 </ul>
 
             </section>
